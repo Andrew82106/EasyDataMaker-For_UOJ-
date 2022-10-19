@@ -2,3 +2,5 @@ cyaron~=0.4.3
 flask~=2.2.2
 wtforms~=3.0.1
 flask_wtf
+gunicorn
+gevent
