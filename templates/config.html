@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Easy Data Maker!</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">Easy Data Maker For UOJ</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Supported by</h4>
+          <ul class="list-unstyled">
+            <li>
+              <a class="text-muted" href="https://github.com/luogu-dev/cyaron">CYaRon From Luogu</a>
+            </li>
+            <li>
+              <a class="text-muted" href="https://v5.bootcss.com/">Bootstrap 5</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="" class="navbar-brand d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24">
+          <circle cx="12" cy="13" r="5"/>
+        </svg>
+        <strong>Easy Data Maker</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+<body>
+<br>
+    <div class="container pt-lg-5 shadow-lg rounded-1">
+        <div class="row py-lg-3">
+            <div class="col-5">
+                <div class="container p-lg-3">
+                    <p class="display-4">数据解释：</p>
+                    <p class="lead text-muted">{{dataDescription[0]}}</p>
+                    {% for i in dataDescription[1] %}
+                    <p><pre class="text-justify">{{ i }}</pre></p>
+                    {% endfor %}
+                    <p class="lead text-muted">{{dataDescription[2]}}</p>
+                    {% for i in dataDescription[3] %}
+                    <p><pre class="text-justify">{{ i }}</pre></p>
+                    {% endfor %}
+                    <div>
+                        <p class="display-4">小样例：</p>
+                        <button class="btn btn-outline-dark" onclick="window.location.href = '/downloads'">下载</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <form method="post">
+                  {{ form.csrf_token }}
+                  {{form.Code(class="form-control",rows="20",cols="40",id="AK",placeholder="将代码直接粘贴进来，不需要进行输入输出的重定向")}}
+                  {{form.submit1(class="btn btn-outline-success form-control",onclick="MyFunction()")}}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container g-5">
+        <br><br>
+        <div class="row p-3">
+            <article class="col text-md-start">
+                <p class="display-6">想试试程序能不能跑通？</p>
+                <p>点击上方按钮，可以得到一组示例数据</p>
+                <p>用示例数据跑跑你的标程，看看有没有什么问题</p>
+            </article>
+            <div class="col">
+                <svg width="557" height="188" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <title>Layer 1</title>
+                        <text fill="#000000" stroke-width="0" x="203.66882" y="184.46895" id="svg_1" font-size="24" font-family="'Saira'" text-anchor="start" xml:space="preserve" stroke="#000" transform="matrix(6.90687 0 0 5.27086 -1324.71 -859.002)" font-weight="bold">EDM</text>
+                        <text fill="#000000" stroke="#000" stroke-width="0" x="357" y="142" id="svg_2" font-size="24" font-family="'Rasa'" text-anchor="start" xml:space="preserve" font-weight="bold">For UOJ</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+<br>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script>
+    function MyFunction(){
+        alert("数据正在生成中，请等待20秒，不要离开页面。离开页面后果自负。")
+    }
+</script>
+</body>
+</html>

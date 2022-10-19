@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<body>
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">Easy Data Maker For UOJ</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Supported by</h4>
+          <ul class="list-unstyled">
+            <li>
+              <a class="text-muted" href="https://github.com/luogu-dev/cyaron">CYaRon From Luogu</a>
+            </li>
+            <li>
+              <a class="text-muted" href="https://v5.bootcss.com/">Bootstrap 5</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24">
+          <circle cx="12" cy="13" r="5"/>
+        </svg>
+        <strong>Easy Data Maker</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+<br>
+<div class="container pt-lg-5 shadow-lg rounded-1">
+    <form method="post" class="row">
+        {{ form.csrf_token }}
+        <div class="col-md-4">
+            <div class="card text-center" style="width:300px">
+                <div class="card-header lead">{{ form.builtin_checker.label }}</div>
+                    <div class="card-body">
+
+        {% for choose in form.builtin_checker %}
+                    <p class="lead">{{ choose.label }}{{ choose }}</p>
+                        <br>
+        {% endfor %}
+                    </div>
+                </div>
+        </div>
+        <div class="col">
+            <p class="lead">{{ form.time_limit.label }}</p>
+                {{ form.time_limit(class="form-control") }}
+            <p class="lead">{{ form.memory_limit.label }}</p>
+                {{ form.memory_limit(class="form-control") }}
+            <br><br><br>
+            {{ form.submit(class="form-control btn-outline-success") }}
+        </div>
+    </form>
+    <br>
+</div>
+<div class="container pt-lg-5">
+    <div class="row">
+        <article class="text-md-start col">
+            <h2 class="display-3">解释器怎么选？</h2>
+                <p>如果输出结果为整数序列，那么用 <code>ncmp</code> 就够了。</p>
+                <p><code>ncmp</code> 会比较标准答案的整数序列和选手输出的整数序列。</p>
+                <p>如果是忽略所有空白字符，进行字符串序列的比较，可以用 <code>wcmp</code>。</p>
+                <p>如果你想按行比较（不忽略行末空格，但忽略文末回车），可以使用 <code>fcmp</code>。</p>
+        </article>
+        <div class="col">
+            <svg width="698" height="255" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                    <title>Layer 1</title>
+                    <text font-weight="bold" transform="matrix(6.90687 0 0 5.27086 -1324.71 -859.002)" stroke="#000" xml:space="preserve" text-anchor="start" font-family="'Saira'" font-size="24" id="svg_1" y="194.90368" x="210.03929" stroke-width="0" fill="#000000">EDM</text>
+                    <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Rasa'" font-size="24" id="svg_2" y="197" x="400" stroke-width="0" stroke="#000" fill="#000000">For UOJ</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

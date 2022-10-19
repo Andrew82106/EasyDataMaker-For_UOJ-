@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Easy Data Maker!</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+
+<body>
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">Easy Data Maker For UOJ</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Supported by</h4>
+          <ul class="list-unstyled">
+            <li>
+              <a class="text-muted" href="https://github.com/luogu-dev/cyaron">CYaRon From Luogu</a>
+            </li>
+            <li>
+              <a class="text-muted" href="https://v5.bootcss.com/">Bootstrap 5</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24">
+          <circle cx="12" cy="13" r="5"/>
+        </svg>
+        <strong>Easy Data Maker</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div>
+  <div class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">数据格式</h1>
+        <p class="lead text-muted">点击下方的提示，下面的文本框中就会生成相应的数据格式，您可以查看并修改</p>
+        <form action="" method="post">
+          <p>
+            {{ form.csrf_token }}
+            <label></label>
+            <!--<textarea class="form-control" rows="3" cols="100" id="AK" placeholder="你也可以直接输入"></textarea>-->
+            <!--{{form.TextInput(class="form-control",rows="3",cols="100",id="AK",placeholder="你也可以直接输入")}}-->
+            {% if flag==False %}
+            {{form.TextInput(class="form-control",rows="3",cols="100",id="AK",placeholder="你也可以直接输入")}}
+            {% else %}
+            <div class="card shadow-sm">
+              <div class="card-header text-center lead text-muted">数据说明</div>
+              <div class="card-body">
+                <p class="lead text-muted">{{dataDescription[0]}}</p>
+                {% for i in dataDescription[1] %}
+                <p><pre >{{ i }}</pre></p>
+                {% endfor %}
+                <p class="lead text-muted">{{dataDescription[2]}}</p>
+                {% for i in dataDescription[3] %}
+                <p><pre class="text-justify">{{ i }}</pre></p>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+          </p>
+          <p>
+            {% if flag==False %}
+            {{form.submit(class="btn btn-primary my-2")}}
+            {% else %}
+              {% if validate==True %}
+                <button onclick="" class="btn btn-primary my-2">填写配置文件</button>
+              {% endif %}
+            <button onclick="" class="btn btn-default">back</button>
+            {% endif %}
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for Fun in Functions %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-header text-center">
+              {{ Fun.Title }}
+            </div>
+            <div class="card-body">
+              <p class="card-text text-center lead text-muted">{{ Fun.Dis }}</p>
+              <div class="d-grid gap-3 mx-auto">
+                <button data-bs-toggle="collapse" data-bs-target="#args{{ Fun.Title }}" class="btn btn-outline-primary rounded-2">参数设定</button>
+              </div>
+              <br>
+              <br>
+                <div id="args{{ Fun.Title }}" class="collapse">
+                {% for k in Fun.args%}
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">{{ k }}</span>
+                      <input type="text" class="form-control args{{ Fun.Title }}">
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group mx-auto">
+                  <button type="button" class="btn btn-sm btn-outline-secondary rounded-2" onclick="myFunction('args{{ Fun.Title }}')">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script>
+    function myFunction(className){
+      var flag = true;
+      var z = document.getElementsByClassName(className)
+      for(var i=0;i<z.length;++i){
+        var k = z[i].value;
+        if (k.length === 0){
+          alert("有参数为空，添加失败");
+          flag=false;
+        }
+      }
+      console.log(flag)
+      if(flag){
+        document.getElementById("AK").value += "{\"FunctionName\":\"".concat(String(className)).concat("\"")
+        for(var i=0;i<z.length;++i){
+          document.getElementById("AK").value += String(",\"arg".concat(String(i+1))).concat("\":[\"").concat(z[i].value).concat("\"]")
+        }
+        document.getElementById("AK").value += "}\n"
+        alert("modify successfully");
+      }
+      for(var j=0;j<document.getElementsByClassName(className).length;++j){
+          document.getElementsByClassName(className)[j].value = ''
+      }
+    }
+  </script>
+  </body>
+</html>
