@@ -12,5 +12,12 @@
 
 ~~聪明的您一定已经发现有DockerFile了吧~~
 
-打包成docker即可。不过要可以安全的使用的话还得结合[这玩意儿](https://github.com/Andrew82106/EasyDataMaker_Docker_allocator)
+打包成docker即可。
+
+```bash
+sudo docker build -f ./DockerFile -t edm:v0 .
+docker run -d -p 8080:4352 edm:v0
+```
+
+不过要可以安全的使用的话还得结合[这玩意儿](https://github.com/Andrew82106/EasyDataMaker_Docker_allocator)
 
