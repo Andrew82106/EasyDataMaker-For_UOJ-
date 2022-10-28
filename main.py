@@ -106,4 +106,4 @@ def returnZIP():  # 返回ZIP的路由
 
 
 if __name__ == '__main__':
-    app.run(port=3690, debug=True)
+    app.run(port=3690, debug=False)
